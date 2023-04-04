@@ -1,0 +1,130 @@
+package com.example.myapplication;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuItem;
+import android.view.SubMenu;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class MainActivity extends AppCompatActivity {
+    EditText te;
+    Button bu;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        te=(EditText) findViewById(R.id.text);
+        bu=(Button) findViewById(R.id.button);
+
+        registerForContextMenu(te);
+        registerForContextMenu(bu);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        SubMenu sm,sm1,sssm,ssssm;
+        if ( v == te ) {
+            menu.add(0,101,0,"빨강");
+            menu.add(0,102,0,"녹색");
+            menu.add(0,103,0,"파랑");
+            menu.add(0,104,0,"노랑");
+            sssm=menu.addSubMenu("문자 변경");
+            sssm.add(0,112,0,"안녕하세요");
+            sssm.add(0,113,0,"반가워요");
+            sssm.add(0,114,0,"또 봐요");
+            ssssm=sssm.addSubMenu("영어로");
+            ssssm.add(0,115,0,"GOOD NIGHT!");
+            ssssm.add(0,116,0,"GOOD BYE!");
+            ssssm.add(0,117,0,"SEE YOU!");
+        }else if( v == bu ){
+            menu.add(0,201,0,"빨강");
+            menu.add(0,202,0,"녹색");
+            menu.add(0,203,0,"파랑");
+            menu.add(0,204,0,"하늘");
+            sm=menu.addSubMenu("무채색");
+            sm.add(0,301,0,"흰색");
+            //sm.add(0,302,0,"회색");
+            sm.add(0,303,0,"검정색");
+            sm1=sm.addSubMenu("회색");
+            sm1.add(0,401,0,"밝은 회색");
+            sm1.add(0,402,0,"그냥 회색");
+            sm1.add(0,403,0,"짙은 회색");
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case 101:
+                te.setBackgroundColor(Color.RED);
+                break;
+            case 102:
+                te.setBackgroundColor(Color.GREEN);
+                break;
+            case 103:
+                te.setBackgroundColor(Color.BLUE);
+                break;
+            case 104:
+                te.setBackgroundColor(Color.YELLOW);
+                break;
+            case 112:
+                te.setText("안녕하세요");
+                break;
+            case 113:
+                te.setText("반가워요");
+                break;
+            case 114:
+                te.setText("또 봐요");
+                break;
+            case 115:
+                te.setText("GOOD NIGHT!");
+                break;
+            case 116:
+                te.setText("GOOD BYE!");
+                break;
+            case 117:
+                te.setText("SEE YOU!");
+                break;
+            case 201:
+                bu.setBackgroundColor(Color.RED);
+                break;
+            case 202:
+                bu.setBackgroundColor(Color.GREEN);
+                break;
+            case 203:
+                bu.setBackgroundColor(Color.BLUE);
+                break;
+            case 204:
+                bu.setBackgroundColor(Color.CYAN);
+                break;
+            case 301:
+                bu.setBackgroundColor(Color.WHITE);
+                break;
+//            case 302:
+//                bu.setBackgroundColor(Color.GRAY);
+//                break;
+            case 303:
+                bu.setBackgroundColor(Color.BLACK);
+                break;
+            case 401:
+                bu.setBackgroundColor(Color.LTGRAY);
+                break;
+            case 402:
+                bu.setBackgroundColor(Color.GRAY);
+                break;
+            case 403:
+                bu.setBackgroundColor(Color.DKGRAY);
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
+}
